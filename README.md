@@ -77,14 +77,93 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 5. Count the total number of tracks by each artist.
 
 ### Medium Level
-1. Calculate the average danceability of tracks in each album.
-2. Find the top 5 tracks with the highest energy values.
-3. List all tracks along with their views and likes where `official_video = TRUE`.
-4. For each album, calculate the total views of all associated tracks.
-5. Retrieve the track names that have been streamed on Spotify more than YouTube.
+6. Calculate the average danceability of tracks in each album.
+7. Find the top 5 tracks with the highest energy values.
+8. List all tracks along with their views and likes where `official_video = TRUE`.
+9. For each album, calculate the total views of all associated tracks.
+10. Retrieve the track names that have been streamed on Spotify more than YouTube.
 
 ### Advanced Level
-1. Find the top 3 most-viewed tracks for each artist using window functions.
-2. Write a query to find tracks where the liveness score is above the average.
-3. **Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.**
+11. Find the top 3 most-viewed tracks for each artist using window functions.
+12. Write a query to find tracks where the liveness score is above the average.
+13. **Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.**
 ```sql
+--1.
+SELECT track,stream
+FROM musicstats
+WHERE stream>1000000000;
+
+--2
+SELECT artist,album
+FROM musicstats
+
+--3.
+SELECT COUNT(comments) AS comment_cnt
+FROM musicstats
+WHERE licensed = TRUE;
+
+--4.
+SELECT track
+FROM musicstats
+WHERE album_type='single';
+
+--5.
+SELECT COUNT(track) AS track_count, artist
+FROM musicstats
+GROUP BY artist;
+
+--6.
+SELECT album ,AVG(danceability) AS avg_danceability 
+FROM musicstats
+GROUP BY album;
+
+--7.
+GROUP BY album;
+SELECT track,energy 
+FROM musicstats
+ORDER BY energy DESC
+LIMIT 5;
+
+--7.
+SELECT track, views, likes
+FROM musicstats
+WHERE official_video = TRUE;
+
+--8.
+SELECT album, SUM(views) AS total_views
+FROM musicstats
+GROUP BY album;
+
+--9.
+
+SELECT artist,COUNT(track) AS tack_count
+FROM musicstats
+GROUP BY artist;
+
+--10.
+SELECT track 
+FROM musicstats
+WHERE most_playedon ='Youtube';
+
+--11.
+SELECT track
+FROM (SELECT artist, track, ROW_NUMBER() OVER(PARTITION BY artist ORDER BY views DESC) AS rank_index
+      FROM musicstats) AS ranked
+WHERE rank_index <= 3;
+
+--12.
+SELECT track, artist, liveness
+FROM musicstats
+WHERE liveness >(
+SELECT AVG(liveness) AS avg_liveness
+FROM musicstats
+);
+
+--13.
+WITH CTE AS(
+SELECT album, MAX(energy) AS MAX_VAL,MIN(energy) AS MIN_VAL
+FROM musicstats
+GROUP BY album
+)
+SELECT album, MAX_VAL-MIN_VAL AS DFFERENCE
+FROM CTE;
