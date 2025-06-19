@@ -33,7 +33,8 @@ CREATE TABLE spotify (
     stream BIGINT,
     energy_liveness FLOAT,
     most_played_on VARCHAR(50)
-);```
+);
+```
 --view the data
 SELECT * FROM musicstats;
 
