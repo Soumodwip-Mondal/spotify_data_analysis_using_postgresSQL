@@ -167,3 +167,20 @@ GROUP BY album
 )
 SELECT album, MAX_VAL-MIN_VAL AS DFFERENCE
 FROM CTE;
+```
+
+Here’s an updated section for your **Spotify Advanced SQL Project and Query Optimization** README, focusing on the query optimization task you performed. You can include the specific screenshots and graphs as described.
+
+---
+
+## Query Optimization Technique 
+
+To improve query performance, we carried out the following optimization process:
+
+- **Initial Query Performance Analysis Using `EXPLAIN`**
+    - We began by analyzing the performance of a query using the `EXPLAIN` function.
+    - The query retrieved tracks based on the `artist` column, and the performance metrics were as follows:
+        - Execution time (E.T.): **7 ms**
+        - Planning time (P.T.): **0.17 ms**
+    - Below is the **screenshot** of the `EXPLAIN` result before optimization:
+    - ![Before using index](https://github.com/Soumodwip-Mondal/spotify_data_analysis_using_postgresSQL/blob/main/spotify_explain_before_index.png)
