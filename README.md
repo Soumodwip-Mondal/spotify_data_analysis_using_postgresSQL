@@ -71,7 +71,7 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
   
 ---
 
-## 15 Practice Questions
+## Problems
 
 ### Easy Level
 1. Retrieve the names of all tracks that have more than 1 billion streams.
