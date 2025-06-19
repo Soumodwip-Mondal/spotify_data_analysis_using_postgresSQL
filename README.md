@@ -3,7 +3,11 @@ In this project  we will analysize the spotify data.
 The dataset is avialavel in kaggel || [Link](https://www.kaggle.com/datasets/sanjanchaudhari/spotify-dataset)<br>
 ![Spotify_Logo](https://github.com/Soumodwip-Mondal/spotify_data_analysis_using_postgresSQL/blob/main/spotify_logo.jpg)
 ## Overview
-This project involves analyzing a Spotify dataset with various attributes about tracks, albums, and artists using **SQL**. It covers an end-to-end process of normalizing a denormalized dataset, performing SQL queries of varying complexity (easy, medium, and advanced), and optimizing query performance. The primary goals of the project are to practice advanced SQL skills and generate valuable insights from the dataset.
+This project involves analyzing a Spotify dataset with various attributes about tracks, albums, and artists using **SQL**. It covers an end-to-end process of normalizing a denormalized dataset, performing SQL queries of varying complexity (easy, medium, and medium to hard), and optimizing query performance. The primary goals of the project are to practice advanced SQL skills and generate valuable insights from the dataset.
+## Technology Stack
+- **Database**: PostgreSQL
+- **SQL Queries**: DDL, DML, Aggregations, Joins, Subqueries, Window Functions
+- **Tools**: pgAdmin 4 (or any SQL editor), PostgreSQL (via Homebrew, Docker, or direct installation)
 
 ```sql code
 -- create table
@@ -83,7 +87,7 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 9. For each album, calculate the total views of all associated tracks.
 10. Retrieve the track names that have been streamed on Spotify more than YouTube.
 
-### Advanced Level
+### Medium to Hard Level
 11. Find the top 3 most-viewed tracks for each artist using window functions.
 12. Write a query to find tracks where the liveness score is above the average.
 13. **Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.**
