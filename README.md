@@ -90,79 +90,79 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 ```sql
 --1.
 SELECT track,stream
-FROM musicstats
+FROM spotify
 WHERE stream>1000000000;
 
 --2
 SELECT artist,album
-FROM musicstats
+FROM spotify
 
 --3.
 SELECT COUNT(comments) AS comment_cnt
-FROM musicstats
+FROM spotify
 WHERE licensed = TRUE;
 
 --4.
 SELECT track
-FROM musicstats
+FROM spotify
 WHERE album_type='single';
 
 --5.
 SELECT COUNT(track) AS track_count, artist
-FROM musicstats
+FROM spotify
 GROUP BY artist;
 
 --6.
 SELECT album ,AVG(danceability) AS avg_danceability 
-FROM musicstats
+FROM spotify
 GROUP BY album;
 
 --7.
 GROUP BY album;
 SELECT track,energy 
-FROM musicstats
+FROM spotify
 ORDER BY energy DESC
 LIMIT 5;
 
 --7.
 SELECT track, views, likes
-FROM musicstats
+FROM spotify
 WHERE official_video = TRUE;
 
 --8.
 SELECT album, SUM(views) AS total_views
-FROM musicstats
+FROM spotify
 GROUP BY album;
 
 --9.
 
 SELECT artist,COUNT(track) AS tack_count
-FROM musicstats
+FROM spotify
 GROUP BY artist;
 
 --10.
 SELECT track 
-FROM musicstats
+FROM spotify
 WHERE most_playedon ='Youtube';
 
 --11.
 SELECT track
 FROM (SELECT artist, track, ROW_NUMBER() OVER(PARTITION BY artist ORDER BY views DESC) AS rank_index
-      FROM musicstats) AS ranked
+      FROM spotify) AS ranked
 WHERE rank_index <= 3;
 
 --12.
 SELECT track, artist, liveness
-FROM musicstats
+FROM spotify
 WHERE liveness >(
 SELECT AVG(liveness) AS avg_liveness
-FROM musicstats
+FROM spotify
 );
 
 --13.
 WITH CTE AS(
 SELECT album, MAX(energy) AS MAX_VAL,MIN(energy) AS MIN_VAL
-FROM musicstats
+FROM spotify
 GROUP BY album
 )
 SELECT album, MAX_VAL-MIN_VAL AS DFFERENCE
